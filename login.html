@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Mate-Register & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles_login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script type="module" src="firebaseauth.js"></script>
+</head>
+
+<body>
+    <div class="title" id="title-logo">
+        <h1>CALORIE MATE</h1>
+    </div>
+
+    <!-- -------------------------------------------- Sign up -------------------------------------------- -->
+    <div class="container" id="signup" style="display:none;">
+        <h1 class="form-title">Register</h1>
+        <form action="" id="form-signUp">
+            <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="rEmail" placeholder="Email" required>
+                <label for="rEmail">Email</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="rPassword" placeholder="Password" required>
+                <label for="rPassword">Password</label>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-repeat"></i>
+                <input type="password" id="repeatPassword" placeholder="Password" required>
+                <label for="repeatPassword">Repeat Password</label>
+            </div>
+            <button class="btn" id="submitSignUp">Sign Up</button>
+        </form>
+        <div class="links">
+            <p>Already Have Account ?</p>
+            <button id="signInButton">Sign In</button>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------- Sign in -------------------------------------------- -->
+    <div class="container" id="signIn">
+        <h1 class="form-title">Sign In</h1>
+        <form method="post" action="" id="form-signIn">
+            <div id="signInMessage" class="messageDiv" style="display:none;"></div>
+
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+            <button class="btn" id="submitSignIn">Sign In</button>
+        </form>
+
+        <div class="links">
+            <p>Don't have account yet?</p>
+            <button id="signUpButton">Sign Up</button>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------- Regist -------------------------------------------- -->
+    <div class="container" id="regist" style="display:none;">
+        <h1 class="form-title">Registration Details</h1>
+        <form action="" id="form-regist">
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="name" placeholder="Name" required>
+                <label for="name">Name</label>
+            </div>
+            <div class="gender-group">
+                <i class="fa-solid fa-venus-mars"></i>
+                <label for="gender">Gender:</label>
+                <input type="radio" id="male" name="gender" value="Male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="Female" required>
+                <label for="female">Female</label>
+            </div>
+            <div class="input-group">
+                <fieldset id="birthForm">
+                    <i class="fa-solid fa-calendar"></i>
+                    <input type="date" id="birthdate" name="birthdate" placeholder="dd/mm/yyyy" required>
+                </fieldset>
+            </div>
+            <div class="data-group">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-arrows-up-down"></i>
+                    <input type="number" id="height" placeholder="Height" min="1" max="251" required>
+                    <label for="height">Height(cm)</label>
+                </div>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-weight-scale"></i>
+                    <input type="number" id="weight" placeholder="Weight" min="1" max="635" required>
+                    <label for="weight">Weight(kg)</label>
+                </div>
+            </div>
+            <button class="btn" id="submitRegist">Submit</button>
+        </form>
+        <div class="links">
+            <button class="btn back-btn" id="backButton"><i class="fas fa-chevron-left"></i> Back</button>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------- BMI -------------------------------------------- -->
+    <div class="container" id="bmi" style="display:none;">
+        <h1 class="form-title">Set Target Weight</h1>
+        <form action="" method="post" id="form-bmi">
+            <div class="txt">
+                <div style="margin-bottom: 5px;"><p>Your BMI Score is:</p></div>
+                <div>
+                    <h2 id="bmi_score"></h2>
+                </div>
+                <div style="margin-bottom: 20px;"></div>
+                <p>Your Ideal Weight Ranges:</p>
+                <div style="margin-bottom: 5px;"></div>
+                <div>
+                    <h2 id="weight-ranges"></h2>
+                </div>
+                <div style="margin-bottom: 20px;"></div>
+                <p>Target Weight (kg):</p> 
+                <div style="margin-bottom: 5px;"></div>
+                <p></p>
+            </div>
+            <div class="input-group">
+                <div class="slider-group">
+                    <h3 id="sliderLeft">0</h3>
+                    <div class="slider-wrapper">
+                        <input type="range" id="targetWeight"step="1" oninput="outputValue.value = this.value">
+                    </div>
+                    <h3 id="sliderRight">100</h3>
+                </div>
+                <p id="output">Value: <output id="outputValue">50</output></p>
+            </div>
+            <button class="btn" id="submitBMI">Finish</button>
+        </form>
+        <div class="links">
+            <button class="btn back-btn" id="backButtonBMI"><i class="fas fa-chevron-left"></i> Back</button>
+        </div>
+    </div>
+    
+
+    <script src="login.js"></script>
+</body>
+
+</html>
